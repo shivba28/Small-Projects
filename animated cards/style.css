@@ -1,48 +1,34 @@
-:root{
-    --primary: #001f3f;
-    --primaryLight: #43b7ff;
-    --secondary: #43b7ff;
-    --secondaryLight: #001f3f;
-    --headerColor: #1a1a1a;
-    --bodyTextColor: #4e4b66;
-    --bodyTextColorWhite: #fafbfc;
-    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
-    --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
-    --bodyFontSize: 1rem;
-    --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
-    --headerFont: "Oswald", Arial, sans-serif;
-    --bodyFont: "Source Sans 3", Arial, sans-serif;
-    --navNeon: "Yellowtail", "Adjusted Verdana Fallback", "Verdana", sans-serif;
-    --dark: #030f18;
-    --medium: #2c394b;
-    --accent: #334756;
-}
-
 body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: var(--bodyFont);
 }
 
 
 @property --color1 {
 syntax: '<color>';
-initial-value: #ffeb3b;
+initial-value: #ffcc80;
 inherits: false;
 }
 @property --color2 {
 syntax: '<color>';
-initial-value: #f57f17;
+initial-value: #ffecb3;
 inherits: false;
 }
-    .skill-card {
-width: 300px;
-height: 400px;
-position: relative;
-overflow: hidden;
-border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+@property --color3{
+    syntax: '<color>';
+    initial-value: #bbdefb;
+    inherits: false;
+}
+
+.skill-card {
+    width: 300px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    transition: all 0.3s ease-in-out;
 }
 
 .background {
@@ -51,14 +37,15 @@ top: 0;
 left: 0;
 right: 0;
 bottom: 0;
-background: linear-gradient(to top, var(--color1), var(--color2)); /* Sunny background */
-transition: --color1 0.5s ease-in-out, --color2 0.3s ease-in-out;
+background: linear-gradient(to top, var(--color1), var(--color2), var(--color3)); /* Sunny background */
+transition: --color1 0.5s ease-in-out, --color2 0.3s ease-in-out, --color3 0.3s ease-in-out;
 overflow: hidden;
 }
 
 .skill-card:hover .background {
 --color1: #0d47a1;
 --color2: #000000;
+--color3: #000000;
 }
 
 .sun, .moon {
@@ -67,16 +54,19 @@ width: 50px;
 height: 50px;
 border-radius: 50%;
 transition: all 0.3s ease-in-out;
+z-index: 10;
 }
 
 .sun img{
     width: 100px;
     height: 100px;
+    animation: sunRotate 4s linear infinite;
 }
 
 .moon img{
     width: 75px;
     height: 75px;
+    animation: moonRotate 4s linear infinite;
 }
 
 .sun {
@@ -112,21 +102,54 @@ color: black;
 text-align: center;
 transition: color 0.3s ease-in-out;
 transform: translateY(50px);
+z-index: 10;
 }
 
 .skill-card:hover .content {
 color: white;
 }
 
-.skill-card .background .night-bg{
+.skill-card .background .dark-bg{
+    position: absolute;
 opacity: 0;
-transform: translateY(15dvh);
+transform: translateY(50dvh);
 transition: all 0.3s ease-in-out;
 }
 
-.skill-card:hover .night-bg{
+.skill-card:hover .dark-bg{
 opacity: 1;
-transform: translateY(9dvh);
+transform: translateY(25dvh) scaleY(1.2);
+}
+
+.skill-card .background .light-bg{
+    position: absolute;
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
+    height: auto;
+    width: 110%;
+    transform: translateY(15dvh);
+    }
+    
+.skill-card:hover .light-bg{
+    opacity: 0;
+}
+
+@-webkit-keyframes sunRotate{
+    from{ transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
+}
+@keyframes sunRotate {
+    from{ transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
+}
+
+@-webkit-keyframes moonRotate{
+    0%,100%{transform: rotate(-10deg);}
+    50%{ transform: rotate(10deg);}
+}
+@keyframes moonRotate {
+    0%,100%{transform: rotate(-10deg);}
+    50%{ transform: rotate(10deg);}
 }
 
 
@@ -519,3 +542,73 @@ transform: translateY(9dvh);
         opacity: 0.2;
     }
 }
+
+
+/* Clouds Background CSS */
+.cloud {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
+    animation: cloudShake;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+  }
+
+.skill-card:hover .cloud{
+    opacity: 0;
+}
+
+.cloud-1 {
+    width: 80px;
+    height: 40px;
+    top: 80px;
+  }
+  
+  .cloud-2 {
+    width: 60px;
+    height: 30px;
+    top: 120px;
+    left: 200px;
+  }
+  
+  .cloud-3 {
+    width: 100px;
+    height: 50px;
+    top: 50px;
+    left: 120px;
+  }
+  
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  .cloud::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 10px;
+  }
+  
+  .cloud::after {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 40px;
+  }
+
+  @-webkit-keyframes cloudShake{
+    0%,100%{transform: translateX(-10px);}
+    50%{transform: translateX(10px);}
+  }
+  @keyframes cloudShake{
+    0%,100%{transform: translateX(-10px);}
+    50%{transform: translateX(10px);}
+  }
