@@ -4,6 +4,13 @@ body{
     align-items: center;
 }
 
+.card-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
 
 @property --color1 {
 syntax: '<color>';
@@ -42,7 +49,7 @@ transition: --color1 0.5s ease-in-out, --color2 0.3s ease-in-out, --color3 0.3s 
 overflow: hidden;
 }
 
-.skill-card:hover .background {
+.card1:hover .background {
 --color1: #0d47a1;
 --color2: #000000;
 --color3: #000000;
@@ -84,12 +91,12 @@ transform: rotate(0deg) translateX(125px) rotate(0deg);
 transition: all 0.3s ease-in-out;
 }
 
-.skill-card:hover .sun{
+.card1:hover .sun{
 opacity: 0;
 transform: rotate(0deg) translateX(-125px) rotate(0deg);
 }
 
-.skill-card:hover .moon {
+.card1:hover .moon {
 opacity: 1;
 transform: rotate(-90deg) translateX(125px) rotate(90deg);
 }
@@ -105,7 +112,7 @@ transform: translateY(50px);
 z-index: 10;
 }
 
-.skill-card:hover .content {
+.card1:hover .content {
 color: white;
 }
 
@@ -116,7 +123,7 @@ transform: translateY(50dvh);
 transition: all 0.3s ease-in-out;
 }
 
-.skill-card:hover .dark-bg{
+.card1:hover .dark-bg{
 opacity: 1;
 transform: translateY(25dvh) scaleY(1.2);
 }
@@ -130,7 +137,7 @@ transform: translateY(25dvh) scaleY(1.2);
     transform: translateY(15dvh);
     }
     
-.skill-card:hover .light-bg{
+.card1:hover .light-bg{
     opacity: 0;
 }
 
@@ -162,7 +169,7 @@ transform: translateY(25dvh) scaleY(1.2);
     opacity: 0;
 }
 
-.skill-card:hover .star-bg{
+.card1:hover .star-bg{
     opacity: 1;
 }
 
@@ -559,7 +566,7 @@ transform: translateY(25dvh) scaleY(1.2);
     animation-iteration-count: infinite;
   }
 
-.skill-card:hover .cloud{
+.card1:hover .cloud{
     opacity: 0;
 }
 
@@ -611,4 +618,36 @@ transform: translateY(25dvh) scaleY(1.2);
   @keyframes cloudShake{
     0%,100%{transform: translateX(-10px);}
     50%{transform: translateX(10px);}
+  }
+
+
+
+
+  /* Card 2 starts here */
+
+  .card2{
+    height: 300px;
+    width: 600px;
+    background-color: #000000;
+  }
+
+  .card2-bg{
+    height:220%;
+    width: 100%;
+    position: absolute;
+    transform: rotate(0deg);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card2:hover .card2-bg{
+    transform: rotate(-180deg);
+  }
+
+  .card2 .content {
+    top: -4dvh;
+    padding: 0;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(5px);
   }
