@@ -1,0 +1,163 @@
+:root{
+    --primary: #001f3f;
+    --primaryLight: #43b7ff;
+    --secondary: #43b7ff;
+    --secondaryLight: #001f3f;
+    --headerColor: #1a1a1a;
+    --bodyTextColor: #4e4b66;
+    --bodyTextColorWhite: #fafbfc;
+    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+    --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
+    --bodyFontSize: 1rem;
+    --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
+    --headerFont: "Oswald", Arial, sans-serif;
+    --bodyFont: "Source Sans 3", Arial, sans-serif;
+    --navNeon: "Yellowtail", "Adjusted Verdana Fallback", "Verdana", sans-serif;
+    --dark: #030f18;
+    --medium: #2c394b;
+    --accent: #334756;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--bodyFont);
+}
+
+
+@property --color1 {
+syntax: '<color>';
+initial-value: #ffeb3b;
+inherits: false;
+}
+@property --color2 {
+syntax: '<color>';
+initial-value: #f57f17;
+inherits: false;
+}
+    .skill-card {
+width: 300px;
+height: 400px;
+position: relative;
+overflow: hidden;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.background {
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(to top, var(--color1), var(--color2)); /* Sunny background */
+transition: --color1 0.5s ease-in-out, --color2 0.3s ease-in-out;
+overflow: hidden;
+}
+
+.skill-card:hover .background {
+--color1: #0d47a1;
+--color2: #000000;
+}
+
+.sun, .moon {
+position: relative;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+transition: all 0.3s ease-in-out;
+}
+
+.sun img{
+    width: 100px;
+    height: 100px;
+}
+
+.moon img{
+    width: 75px;
+    height: 75px;
+}
+
+.sun {
+top: 175px;
+left: 30px;
+opacity: 1;
+transform: rotate(90deg) translateX(-175px) rotate(-90deg);
+}
+
+.moon {
+top: 80px;
+left: 190px;
+opacity: 0;
+transform: rotate(0deg) translateX(125px) rotate(0deg);
+transition: all 0.3s ease-in-out;
+}
+
+.skill-card:hover .sun{
+opacity: 0;
+transform: rotate(0deg) translateX(-125px) rotate(0deg);
+}
+
+.skill-card:hover .moon {
+opacity: 1;
+transform: rotate(-90deg) translateX(125px) rotate(90deg);
+}
+
+.content {
+position: relative;
+z-index: 10;
+padding: 20px;
+color: black;
+text-align: center;
+transition: color 0.3s ease-in-out;
+transform: translateY(50px);
+}
+
+.skill-card:hover .content {
+color: white;
+}
+
+.skill-card .background .night-bg{
+opacity: 0;
+transform: translateY(15dvh);
+transition: all 0.3s ease-in-out;
+}
+
+.skill-card:hover .night-bg{
+opacity: 1;
+transform: translateY(9dvh);
+}
+
+.star{
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    opacity: 0;
+    display: block;
+}
+
+.star1 {
+    top: 2%;
+    left: 25%;
+    animation: starFlicker;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes starFlicker {
+    0% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    
+    100% {
+        opacity: 0.2;
+    }
+}
