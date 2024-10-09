@@ -139,6 +139,7 @@ transform: translateY(25dvh) scaleY(1.2);
     
 .card1:hover .light-bg{
     opacity: 0;
+    transform: translateY(50dvh);
 }
 
 @-webkit-keyframes sunRotate{
