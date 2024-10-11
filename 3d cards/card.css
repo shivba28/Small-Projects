@@ -4,179 +4,197 @@ body{
     align-items: center;
 }
 
-.card-container{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-}
-
-
-@property --color1 {
-syntax: '<color>';
-initial-value: #ffcc80;
-inherits: false;
-}
-@property --color2 {
-syntax: '<color>';
-initial-value: #ffecb3;
-inherits: false;
-}
-@property --color3{
-    syntax: '<color>';
-    initial-value: #bbdefb;
-    inherits: false;
-}
-
-.skill-card {
-    width: 300px;
-    height: 600px;
+.card-3d-wrap {
     position: relative;
-    overflow: hidden;
+    width: 300px;
+    max-width: calc(100% - 20px);
+    height: 600px;
     border-radius: 10px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    margin-top: 90px;
+  }
+
+  .card-3d-wrapper {
+    width: 100%;
+    height: 100%;
+    position:absolute;    
+    top: 0;
+    left: 0;   
+    border-radius: 10px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    /* transition: transform 700ms 400ms ease-out;  */
+	transition: transform 800ms 200ms ease-out;
+  }
+
+  .card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    left: 0;
+    top: 0;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* box-shadow: 0 12px 35px 0 rgba(16, 39, 112,.07); */
     box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    transition: all 0.3s ease-in-out;
-}
+  }
+  .card-back {
+    transform: rotateY(-180deg);
+  }
 
-.background {
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: linear-gradient(to top, var(--color1), var(--color2), var(--color3)); /* Sunny background */
-transition: --color1 0.5s ease-in-out, --color2 0.3s ease-in-out, --color3 0.3s ease-in-out;
-overflow: hidden;
-}
-
-.card1:hover .background {
---color1: #0d47a1;
---color2: #000000;
---color3: #000000;
-}
-
-.sun, .moon {
-position: relative;
-width: 50px;
-height: 50px;
-border-radius: 50%;
-transition: all 0.3s ease-in-out;
-z-index: 10;
-}
-
-.sun img{
-    width: 100px;
-    height: 100px;
-    animation: sunRotate 4s linear infinite;
-}
-
-.moon img{
-    width: 75px;
-    height: 75px;
-    animation: moonRotate 4s linear infinite;
-}
-
-.sun {
-top: 175px;
-left: 30px;
-opacity: 1;
-transform: rotate(90deg) translateX(-175px) rotate(-90deg);
-}
-
-.moon {
-top: 80px;
-left: 190px;
-opacity: 0;
-transform: rotate(0deg) translateX(125px) rotate(0deg);
-transition: all 0.3s ease-in-out;
-}
-
-.card1:hover .sun{
-opacity: 0;
-transform: rotate(0deg) translateX(-125px) rotate(0deg);
-}
-
-.card1:hover .moon {
-opacity: 1;
-transform: rotate(-90deg) translateX(125px) rotate(90deg);
-}
-
-.content {
-position: relative;
-z-index: 10;
-padding: 20px;
-color: black;
-text-align: center;
-transition: color 0.3s ease-in-out;
-transform: translateY(50px);
-z-index: 10;
-}
-
-.card1:hover .content {
-color: white;
-}
-
-.skill-card .background .dark-bg{
+  .card-3d-wrapper .background {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
     position: absolute;
-opacity: 0;
-transform: translateY(50dvh);
-transition: all 0.3s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .card-3d-wrapper .card-front .cloud-bg .cloud, .card-3d-wrapper .card-back .star-bg{
+    z-index: 5;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .card-front .background {
+    background: linear-gradient(to top, #ffcc80, #ffecb3, #bbdefb); /* Sunny background */
+    }
+.card-front .cloud-bg {
+    background-color: linear-gradient(to top, #ffecb3, #bbdefb);
 }
 
-.card1:hover .dark-bg{
-opacity: 1;
-transform: translateY(25dvh) scaleY(1.2);
-}
+    .card-back .background{
+        background: linear-gradient(to top, #0d47a1, #000000, #000000);
+    }
+ 
 
-.skill-card .background .light-bg{
-    position: absolute;
+  .card-3d-wrap:hover .card-3d-wrapper {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    transition: transform 800ms 200ms ease-out; 
+  }
+
+  .card-front .background .cloud-bg{
+    max-height: 30%;
+  }
+
+  .card-front .background .cloud-bg .light-bg{
+    width: 100%;
+    transform: translate(0dvw, 25dvh);
+  }
+
+  .card-back .background .star-bg .dark-bg{
+    width: 100%;
+    transform: translate(0dvw, 30dvh) scaleY(3);
+  }
+
+  .card-front .sun, .card-back .moon{
+    z-index: 5;
+    top: 0dvh;
+    pointer-events: auto;
     opacity: 1;
-    transition: all 0.1s ease-in-out;
-    height: auto;
-    width: 110%;
-    transform: translateY(20dvh);
+  }
+
+  .card-front .sun{
+    transform: translate3d(0, 0, 45px) perspective(100px);
+    transition: transform 400ms 800ms ease;
+  }
+
+  .card-back .moon{
+    transform: translate3d(100px, 75px, 45px) perspective(100px);
+    transition: transform 400ms ease;
+  }
+
+  .card-3d-wrap:hover .card-front .sun {
+    transform: translate3d(-150px, 75px, 45px) perspective(100px);
+    pointer-events: none;
+    transition: transform 400ms ease;
+  }
+
+  .card-3d-wrap:hover .card-back .moon {
+    transform: translate3d(0px, 30px, 45px) perspective(100px);
+    pointer-events: none;
+    transition: transform 400ms 800ms ease;
+  }
+
+
+  .sun, .moon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
     }
     
-.card1:hover .light-bg{
-    opacity: 0;
-    transform: translateY(50dvh);
-}
+    .sun img{
+        width: 100px;
+        height: 100px;
+        animation: sunRotate 4s linear infinite;
+    }
+    
+    .moon img{
+        width: 75px;
+        height: 75px;
+        animation: moonRotate 4s linear infinite;
+    }
 
-@-webkit-keyframes sunRotate{
-    from{ transform: rotate(0deg);}
-    to{transform: rotate(360deg);}
-}
-@keyframes sunRotate {
-    from{ transform: rotate(0deg);}
-    to{transform: rotate(360deg);}
-}
+    .sun {
+        top: 175px;
+        left: 30px;
+        }
+        
+        .moon {
+        top: 80px;
+        left: 190px;
+        }
 
-@-webkit-keyframes moonRotate{
-    0%,100%{transform: rotate(-10deg);}
-    50%{ transform: rotate(10deg);}
-}
-@keyframes moonRotate {
-    0%,100%{transform: rotate(-10deg);}
-    50%{ transform: rotate(10deg);}
-}
-
-
-
+        @-webkit-keyframes sunRotate{
+            from{ transform: rotate(0deg);}
+            to{transform: rotate(360deg);}
+        }
+        @keyframes sunRotate {
+            from{ transform: rotate(0deg);}
+            to{transform: rotate(360deg);}
+        }
+        
+        @-webkit-keyframes moonRotate{
+            0%,100%{transform: rotate(-10deg);}
+            50%{ transform: rotate(10deg);}
+        }
+        @keyframes moonRotate {
+            0%,100%{transform: rotate(-10deg);}
+            50%{ transform: rotate(10deg);}
+        }
 
 
 /* Stars Background CSS */
 
 .star-bg{
-    opacity: 0;
-}
-
-.card1:hover .star-bg{
     opacity: 1;
 }
 
 .shooting-star {
     position: absolute;
-    right: 50%;
+    right: 80%;
     top: -25.59%;
     width: 1px;
     height: 70px;
@@ -186,8 +204,8 @@ transform: translateY(25dvh) scaleY(1.2);
     transform: rotate(-15deg);
     -webkit-animation: shootingStar;
     animation: shootingStar;
-    -webkit-animation-duration: 9s;
-    animation-duration: 9s;
+    -webkit-animation-duration: 4.5s;
+    animation-duration: 4.5s;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
     -webkit-animation-timing-function: ease-in;
@@ -200,8 +218,8 @@ transform: translateY(25dvh) scaleY(1.2);
     top: -23.59%;
     -webkit-animation: shootingStar2;
     animation: shootingStar2;
-    -webkit-animation-duration: 10s;
-    animation-duration: 10s;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
     -webkit-animation-timing-function: ease-in;
@@ -210,16 +228,17 @@ transform: translateY(25dvh) scaleY(1.2);
     animation-delay: 1.5s;
 }
 
+
 @-webkit-keyframes shootingStar {
     0% {
         top: -13.59%;
-        right: 60%;
+        right: 80%;
     }
 
-    2% {
+    4% {
         opacity: 0;
-        top: 100%;
-        right: 0%;
+        top: 300%;
+        right: 20%;
     }
 
     86% {
@@ -234,13 +253,13 @@ transform: translateY(25dvh) scaleY(1.2);
 @keyframes shootingStar {
     0% {
         top: -13.59%;
-        right: 60%;
+        right: 80%;
     }
 
-    2% {
+    4% {
         opacity: 0;
-        top: 100%;
-        right: 0%;
+        top: 300%;
+        right: 20%;
     }
 
     86% {
@@ -258,9 +277,9 @@ transform: translateY(25dvh) scaleY(1.2);
         right: 50%;
     }
 
-    2% {
+    4% {
         opacity: 0;
-        top: 100%;
+        top: 300%;
         right: -17%;
     }
 
@@ -279,9 +298,9 @@ transform: translateY(25dvh) scaleY(1.2);
         right: 50%;
     }
 
-    2% {
+    4% {
         opacity: 0;
-        top: 100%;
+        top: 300%;
         right: -17%;
     }
 
@@ -567,14 +586,10 @@ transform: translateY(25dvh) scaleY(1.2);
     animation-iteration-count: infinite;
   }
 
-.card1:hover .cloud{
-    opacity: 0;
-}
-
 .cloud-1 {
     width: 80px;
     height: 40px;
-    top: 80px;
+    top: 100px;
   }
   
   .cloud-2 {
@@ -619,153 +634,4 @@ transform: translateY(25dvh) scaleY(1.2);
   @keyframes cloudShake{
     0%,100%{transform: translateX(-10px);}
     50%{transform: translateX(10px);}
-  }
-
-
-
-
-  /* Card 2 starts here */
-
-  .card2{
-    height: 300px;
-    width: 600px;
-    background-color: #000000;
-  }
-
-  .card2-bg{
-    height:220%;
-    width: 100%;
-    position: absolute;
-    transform: rotate(0deg);
-    transition: all 0.3s ease-in-out;
-  }
-
-  .card2:hover .card2-bg{
-    transform: rotate(-180deg);
-  }
-
-  .card2 .content {
-    top: -4dvh;
-    padding: 0;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    backdrop-filter: blur(0px);
-  }
-
-
-
-  /* Card-3 3D flip effect CSS */
-
-  .card-3d-wrap {
-    position: relative;
-    width: 300px;
-    max-width: calc(100% - 20px);
-    height: 600px;
-    border-radius: 10px;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    margin-top: 90px;
-  }
-
-  .card-3d-wrapper {
-    width: 100%;
-    height: 100%;
-    position:absolute;    
-    top: 0;
-    left: 0;   
-    border-radius: 10px;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    /* transition: transform 700ms 400ms ease-out;  */
-    -webkit-transition: 700ms 400ms ease-out;
-	transition: 700ms 400ms ease-out;
-  }
-
-  .card-front, .card-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 10px;
-    left: 0;
-    top: 0;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden;
-    /* box-shadow: 0 12px 35px 0 rgba(16, 39, 112,.07); */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-  }
-  .card-back {
-    transform: rotateY(180deg);
-  }
-
-  .card-3d-wrapper .background {
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .card-3d-wrapper .background .cloud-bg{
-    z-index: 1;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden;
-    width: 100%;
-  }
-
-  .card-front .background {
-    background: linear-gradient(to top, #ffcc80, #ffecb3, #bbdefb); /* Sunny background */
-    }
-
-    .card-back .background{
-        background: linear-gradient(to top, #0d47a1, #000000, #000000); /* Sunny background */
-    }
- 
-
-  .card-3d-wrap:hover .card-3d-wrapper {
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-  }
-
-  .card-front .background .cloud-bg{
-    max-height: 30%;
-  }
-
-  .card-front .background .cloud-bg .light-bg{
-    width: 100%;
-    transform: translate(0dvw, 25dvh);
-  }
-
-  .card-front .sun{
-    z-index: 5;
-    top: 0dvh;
-    transform: translate3d(0, 0, 45px) perspective(100px);
-    opacity: 1;
-    pointer-events: auto;
-    transition: transform 400ms 1200ms ease, opacity 400ms 1200ms ease;
-  }
-
-  .card-3d-wrap:hover .card-front .sun{
-     opacity: 0;
-    transform: translate3d(-50px, 25px, 45px) perspective(100px);
-    pointer-events: none;
-    transition: transform 400ms ease, opacity 200ms 150ms ease;
   }
