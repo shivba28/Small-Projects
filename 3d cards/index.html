@@ -57,15 +57,127 @@ h2, p {
 .card-container:hover .card {
   transform: rotateY(180deg);  /* Flip the card when hovered */
 }
+
+.cloud {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
+    animation: cloudShake;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    z-index: 2;
+    transform-style: preserve-3d;
+    /* Ensures 3D elements are properly rendered */
+  }
+
+.cloud-1 {
+    width: 80px;
+    height: 40px;
+    top: 160px;
+    transform: translateZ(100px);
+    
+  }
+  
+  .cloud-2 {
+    width: 60px;
+    height: 30px;
+    top: 120px;
+    left: 10px;
+    transform: translate3d(100px);
+  }
+  
+  .cloud-3 {
+    width: 100px;
+    height: 50px;
+    top: 50px;
+    left: 120px;
+    transform: translate3d(100px);
+  }
+  
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    transform: translateZ(100px);
+  }
+  
+  .cloud::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 10px;
+    transform: translateZ(100px);
+  }
+  
+  .cloud::after {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 40px;
+    transform: translateZ(100px);
+  }
+
+  @-webkit-keyframes cloudShake{
+    0%,100%{transform: translateX(-10px);}
+    50%{transform: translateX(10px);}
+  }
+  @keyframes cloudShake{
+    0%,100%{transform: translateX(-10px);}
+    50%{transform: translateX(10px);}
+  }
+
+  @-webkit-keyframes sunRotate{
+            from{ transform: rotate(0deg);}
+            to{transform: rotate(360deg);}
+        }
+        @keyframes sunRotate {
+            from{ transform: rotate(0deg);}
+            to{transform: rotate(360deg);}
+        }
+
+        .sun {
+          transform: translateZ(100px);
+          z-index: 1;
+        }
+        .sun, .moon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    }
+    
+    .sun img{
+        width: 100px;
+        height: 100px;
+        animation: sunRotate 4s linear infinite;
+    }
+    .cloud-bg{
+      position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+      transform-style: preserve-3d;
+    }
         </style>
     </head>
     <body>
         <div class="card-container">
             <div class="card">
               <div class="card-front">
-                <h2>My Skills</h2>
-                <p>Front side content (e.g., skill categories)</p>
-              </div>
+                        <div class="sun"><img src="/sun.png" /></div>
+                        <div class="cloud-bg">
+                <div class="cloud cloud-1"></div></div>
+                <!-- <div class="cloud cloud-2"></div>
+                <div class="cloud cloud-3"></div> -->
+                        <!-- <img class="light-bg" src="/palm.png"/> -->
+            </div>
               <div class="card-back">
                 <h2>Skills Details</h2>
                 <p>Back side content (e.g., specific skills)</p>
