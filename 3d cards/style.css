@@ -1,41 +1,582 @@
+body{
+  background-color: #000;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+/* Container with perspective applied */
 .card-container {
-    perspective: 1000px;
+perspective: 1000px;
+display: flex;
+justify-content: center;
+align-content: center;
+width: 300px;
+height: 600px;
+}
+
+.card {
+width: 300px;
+height: 600px;
+position: relative;
+transform-style: preserve-3d;  /* Ensures 3D elements are properly rendered */
+transition: transform 0.8s ease-in-out;  /* Smooth transition for flipping */
+}
+
+.card-front,
+.card-back {
+position: absolute;
+width: 100%;
+height: 100%;
+backface-visibility: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+text-align: center;
+transform-style: preserve-3d;  /* Ensure the content inside respects the 3D effect */
+}
+
+.card-front {
+background: linear-gradient(to top, #ffcc80, #ffecb3, #bbdefb); /* Sunny background */
+color: #000;
+}
+
+.card-back {
+background: linear-gradient(to top, #0d47a1, #000000, #000000);
+color: #fff;
+transform: rotateY(-180deg);
+}
+
+/* 3D Text Styles */
+h2, p {
+font-family: 'Arial', sans-serif;
+font-size: 24px;
+color: #fff;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6),   /* Basic shadow for depth */
+        4px 4px 8px rgba(0, 0, 0, 0.4),   /* Additional shadow layers */
+        6px 6px 12px rgba(0, 0, 0, 0.2);  /* Deeper shadow for stronger 3D effect */
+transform: translateZ(100px);
+}
+.card-container:hover .card {
+transform: rotateY(-180deg);  /* Flip the card when hovered */
+}
+
+
+
+@-webkit-keyframes cloudShake{
+0%,100%{transform: translateX(-10px);}
+50%{transform: translateX(10px);}
+}
+@keyframes cloudShake{
+0%,100%{transform: translateX(-10px);}
+50%{transform: translateX(10px);}
+}
+
+@-webkit-keyframes sunRotate{
+     from{ transform: rotate(0deg);}
+     to{transform: rotate(360deg);}
+ }
+ @keyframes sunRotate {
+     from{ transform: rotate(0deg);}
+     to{transform: rotate(360deg);}
+ }
+
+ .sun {
+   transform: translateZ(50px);
+   z-index: 1;
+   top: -20dvh;
+   left: -5dvw;
+ }
+ .sun, .moon {
+position: relative;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+transition: all 0.3s ease-in-out;
+}
+
+.sun img{
+ width: 100px;
+ height: 100px;
+ animation: sunRotate 4s linear infinite;
+}
+.cloud-bg{
+position: absolute;
+backface-visibility: hidden;
+transform-style: preserve-3d;
+width: 100%;
+height: 100%;
+z-index: 2;
+transform: translateZ(50px);
+top: 11dvh;
+}
+
+.cloud-bg img{
+position: absolute;
+width: 100px;
+height: 100px;
+animation: cloudShake 4s linear infinite;
+}
+
+.cloud-1{
+top: -3dvh;
+}
+.cloud-2 {
+top: -10dvh;
+left: 180px;
+}
+
+.cloud-3 {
+top: -5dvh;
+left: 20px;
+}
+
+.light-bg{
+position: absolute;
+width: 300px;
+bottom: 15px;
+transform: translateZ(50px);
+}
+
+.moon img{
+  width: 80px;
+  height: 80px;
+  animation: moonRotate 4s linear infinite;
+}
+.moon {
+  transform: translateZ(50px);
+  z-index: 1;
+  top: -20dvh;
+  left: 3dvw;
+}
+
+@-webkit-keyframes moonRotate{
+  0%,100%{transform: rotate(-10deg);}
+  50%{ transform: rotate(10deg);}
+}
+@keyframes moonRotate {
+  0%,100%{transform: rotate(-10deg);}
+  50%{ transform: rotate(10deg);}
+}
+
+
+/* Stars Background CSS */
+
+.star-bg{
+  position: absolute;
+  opacity: 1;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  z-index: 2;
+}
+
+.shooting-star {
+  position: absolute;
+  right: 80%;
+  top: -25.59%;
+  width: 1px;
+  height: 70px;
+  background: #fff;
+  -webkit-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  transform: rotate(-15deg);
+  -webkit-animation: shootingStar;
+  animation: shootingStar;
+  -webkit-animation-duration: 4.5s;
+  animation-duration: 4.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+  backface-visibility: hidden;
+  opacity: 0;
+}
+
+.shooting-star2 {
+  top: -23.59%;
+  -webkit-animation: shootingStar2;
+  animation: shootingStar2;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+  backface-visibility: hidden;
+  opacity: 0;
+}
+
+
+@-webkit-keyframes shootingStar {
+  0% {
+      top: -13.59%;
+      right: 80%;
   }
-  
-  .card {
-    width: 300px;
-    height: 200px;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.8s;
+  1% {
+    opacity: 1;
   }
-  
-  .card-front,
-  .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  2% {
+      opacity: 0;
+      top: 100%;
+      right: 20%;
   }
-  
-  .card-front {
-    background-color: #fff;
-    color: #000;
+
+  86% {
+      opacity: 0;
   }
-  
-  .card-back {
-    background-color: #333;
-    color: #fff;
-    transform: rotateY(180deg);
+
+  100% {
+      opacity: 0;
   }
-  
-  .card-container:hover .card {
-    transform: rotateY(180deg);
+}
+
+@keyframes shootingStar {
+  0% {
+      top: -13.59%;
+      right: 80%;
   }
-  
+  1% {
+    opacity: 1;
+  }
+
+  2% {
+      opacity: 0;
+      top: 100%;
+      right: 20%;
+  }
+
+  86% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
+@-webkit-keyframes shootingStar2 {
+  0% {
+      top: -23.59%;
+      right: 50%;
+      opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
+  }
+  2% {
+      opacity: 0;
+      top: 100%;
+      right: -17%;
+  }
+
+  86% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes shootingStar2 {
+  0% {
+      top: -23.59%;
+      right: 50%;
+  }
+  1% {
+    opacity: 1;
+  }
+
+  2% {
+      opacity: 0;
+      top: 100%;
+      right: -17%;
+  }
+
+  86% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
+.star {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  opacity: 0.5;
+  display: block;
+  transform: translateZ(50px);
+  z-index: 1;
+}
+
+.star1 {
+  top: 2%;
+  left: 25%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 3s;
+  animation-duration: 6s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.star2 {
+  top: 1.3%;
+  left: 48%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 2s;
+  animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+
+.star3 {
+  top: 20%;
+  left: 36%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 4s;
+  animation-duration: 8s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.star4 {
+  top: 17%;
+  left: 5%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 4s;
+  animation-duration: 7s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+.star5 {
+  top: 11%;
+  right: 19%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 4s;
+  animation-duration: 8s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.star6 {
+  top: 4%;
+  right: 24%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+
+.star7 {
+  top: 3%;
+  left: 29%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+}
+
+.star8 {
+  top: 18%;
+  left: 56%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 3s;
+  animation-duration: 7s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.star9 {
+  top: 31%;
+  left: 57%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+
+.star10 {
+  top: 27%;
+  left: 12%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.star11 {
+  top: 7%;
+  right: 31%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 1.4s;
+  animation-delay: 1.4s;
+}
+
+.star12 {
+  top: 35%;
+  right: 12%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 4.5s;
+  animation-duration: 4.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 1.1s;
+  animation-delay: 1.1s;
+}
+
+.star13 {
+  top: 12%;
+  right: 25%;
+  -webkit-animation: starFlicker;
+  animation: starFlicker;
+  -webkit-animation-duration: 3.3s;
+  animation-duration: 3.3s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+
+@-webkit-keyframes starFlicker {
+  0% {
+      opacity: 0.2;
+  }
+
+  50% {
+      opacity: 0.8;
+  }
+
+  100% {
+      opacity: 0.2;
+  }
+}
+
+@keyframes starFlicker {
+  0% {
+      opacity: 0.2;
+  }
+
+  50% {
+      opacity: 0.8;
+  }
+
+  100% {
+      opacity: 0.2;
+  }
+}
+
+.dark-bg{
+  position: absolute;
+  bottom: 5.5dvh;
+  backface-visibility: hidden;
+  width: 95%;
+  transform: scaleY(2) translateZ(50px);
+}
