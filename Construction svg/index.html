@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D-like Construction Animation</title>
+  <style>
+    .crane-line {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: moveCrane 4s linear infinite;
+    }
+
+    .building-part {
+      fill: transparent;
+      stroke: #f4a261;
+      stroke-width: 2;
+      animation: buildUp 6s ease forwards;
+    }
+
+    .crane {
+      animation: swingCrane 3s ease-in-out infinite;
+      transform-origin: top;
+    }
+
+    .ground {
+      fill: #264653;
+    }
+
+    @keyframes moveCrane {
+      0% {
+        stroke-dashoffset: 100;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes buildUp {
+      0% {
+        fill: transparent;
+      }
+      100% {
+        fill: #2a9d8f;
+      }
+    }
+
+    @keyframes swingCrane {
+      0%, 100% {
+        transform: rotate(-3deg);
+      }
+      50% {
+        transform: rotate(3deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <svg width="400" height="400" viewBox="0 0 200 200">
+    <!-- Crane -->
+    <g class="crane">
+      <!-- Crane body -->
+      <rect x="50" y="20" width="10" height="80" fill="#a0a0a0" />
+      <!-- Crane arm -->
+      <polygon points="60,20 160,30 160,35 60,30" fill="#a0a0a0" />
+      <!-- Crane hook -->
+      <line x1="120" y1="30" x2="120" y2="100" stroke="#2a9d8f" stroke-width="2"/>
+      <rect x="115" y="100" width="10" height="10" fill="#e76f51" />
+    </g>
+
+    <!-- Building under construction -->
+    <rect class="building-part" x="70" y="120" width="40" height="40" />
+    <rect class="building-part" x="70" y="160" width="40" height="40" />
+
+    <!-- Ground -->
+    <rect class="ground" x="0" y="200" width="200" height="20" />
+  </svg>
+
+</body>
+</html>
