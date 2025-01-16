@@ -22,7 +22,11 @@ def process_pdfs(input_folder, output_folder):
                 # Remove trailing designators (e.g., IS, HS, ES) if present
                 # Check for a second part in the school name and handle designators
                 name_parts = school_name.split()
-                if name_parts[1] not in ["HS", "IS", "ES", "IS.pdf", "HS.pdf", "ES.pdf"]:
+                if name_parts[1] == "ATP.pdf":
+                    name_parts[0] = "Adult-Transition-Program-At-Jordan"
+                if name_parts[1] == "Education.pdf":
+                    name_parts[0] = "Mark-Twain"
+                if name_parts[1] not in ["HS", "IS", "ES", "IS.pdf", "HS.pdf", "ES.pdf", "Education.pdf", "ATP.pdf"]:
                     school_name = f"{name_parts[0]}-{name_parts[1]}"
                 else:
                     school_name = name_parts[0]
