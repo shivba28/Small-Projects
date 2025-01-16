@@ -20,7 +20,14 @@ def process_pdfs(input_folder, output_folder):
                 school_name = parts[-1]
 
                 # Remove trailing designators (e.g., IS, HS, ES) if present
-                school_name = school_name.split()[0]
+                # Check for a second part in the school name and handle designators
+                name_parts = school_name.split()
+                if name_parts[1] not in ["HS", "IS", "ES", "IS.pdf", "HS.pdf", "ES.pdf"]:
+                    school_name = f"{name_parts[0]}-{name_parts[1]}"
+                else:
+                    school_name = name_parts[0]
+
+                school_name = school_name.lower()
                 
                 # Generate the new file name
                 new_file_name = f"{school_name}-english.pdf"
