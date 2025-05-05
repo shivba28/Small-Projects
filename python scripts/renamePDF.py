@@ -34,7 +34,7 @@ def process_pdfs(input_folder, output_folder):
                 school_name = school_name.lower()
                 
                 # Generate the new file name
-                new_file_name = f"{school_name}-english.pdf"
+                new_file_name = f"{school_name}-Vietnamese.pdf"
                 
                 # Define file paths
                 original_file_path = os.path.join(input_folder, file_name)
@@ -46,6 +46,6 @@ def process_pdfs(input_folder, output_folder):
 
 if __name__ == "__main__":
     # Specify the input and output folders
-    input_folder = "/Users/techsupport/Desktop/All_English/"
+    input_folder = "/Users/techsupport/Desktop/All_Viet/"
     output_folder = "/Users/techsupport/Desktop/Output/"
     process_pdfs(input_folder, output_folder)
