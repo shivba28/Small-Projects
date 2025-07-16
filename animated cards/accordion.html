@@ -1,0 +1,67 @@
+<html>
+  <head>
+        <link rel="stylesheet" href="./accordion.css">
+    </head>
+  <body>
+    <div data-accordion-close-siblings="true" data-accordion-css-init="" class="accordion-css">
+      <ul class="accordion-css__list">
+          <li data-accordion-status="not-active" class="accordion-css__item">
+              <div class="accordion-css__bg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 602 1212" fill="none" class="accordion-css__bg-svg">
+                      <path d="M601 1199C601 1205.63 595.627 1211 589 1211H13C6.37257 1211 1 1205.63 1 1199V7.00001C1 3.68631 3.68629 1 7 1H116C118.761 1 121 3.23858 121 6V6C121 8.76142 123.239 11 126 11H595C598.314 11 601 13.6863 601 17V1199Z" fill="var(--color-mango)" stroke="var(--color-dark)" stroke-width="0.125em" vector-effect="non-scaling-stroke"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 372 1212" fill="none" class="accordion-css__bg-svg is--mobile">
+                      <path d="M371 1199C371 1205.63 365.627 1211 359 1211H13C6.37258 1211 1 1205.63 1 1199V13C1 6.37261 6.37258 1 13 1H116C118.761 1 121 3.23858 121 6V6C121 8.76142 123.239 11 126 11H359C365.627 11 371 16.3726 371 23V1199Z" fill="var(--color-mango)" stroke="var(--color-dark)" stroke-width="0.125em" vector-effect="non-scaling-stroke"></path>
+                  </svg>
+              </div>
+              <div class="accordion-css__item-bottom">
+                  <div class="accordion-css__item-bottom-wrap">
+                      <div class="accordion-css__item-bottom-content">
+                          <div class="accordion-css__card">
+                              <p class="accordion-css__item-p">This is a <strong>non-profit</strong> event, and our goal is to make FlowFest as <strong>affordable</strong> as we possibly can whilst delivering a <strong>quality</strong> day that you’ll never forget. Due to last year’s feedback we are investing more in <strong>comfort</strong> and <strong>quality</strong> this year.</p>
+                              <p class="accordion-css__item-p">To keep ticket prices as <strong>low</strong> as we can for <strong>everyone</strong>, we are <strong>unable</strong> to offer discounts and appreciate your <strong>support</strong> for this community event.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div data-hover="" data-accordion-toggle="" class="accordion-css__item-top">
+                  <h3 class="accordion-css__item-h3"><strong>Can I have a discount?</strong></h3>
+                  <div class="accordion-css__item-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="accordion-css__item-icon-svg">
+                          <path d="M1.05469 9.40723H16.0547" stroke="currentColor" stroke-width="0.125em" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+                          <path d="M8.55176 1.90723L8.55176 16.9072" stroke="currentColor" stroke-width="0.125em" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+                      </svg>
+                  </div>
+              </div>
+          </li>
+      </ul>
+    </div>
+    <script>
+        function initAccordionCSS() {
+        document.querySelectorAll('[data-accordion-css-init]').forEach((accordion) => {
+            const closeSiblings = accordion.getAttribute('data-accordion-close-siblings') === 'true';
+
+            accordion.addEventListener('click', (event) => {
+            const toggle = event.target.closest('[data-accordion-toggle]');
+            if (!toggle) return; // Exit if the clicked element is not a toggle
+
+            const singleAccordion = toggle.closest('[data-accordion-status]');
+            if (!singleAccordion) return; // Exit if no accordion container is found
+
+            const isActive = singleAccordion.getAttribute('data-accordion-status') === 'active';
+            singleAccordion.setAttribute('data-accordion-status', isActive ? 'not-active' : 'active');
+            
+            // When [data-accordion-close-siblings="true"]
+            if (closeSiblings && !isActive) {
+                accordion.querySelectorAll('[data-accordion-status="active"]').forEach((sibling) => {
+                if (sibling !== singleAccordion) sibling.setAttribute('data-accordion-status', 'not-active');
+                });
+            }
+            });
+        });
+        }
+
+        initAccordionCSS();
+    </script>
+  </body>
+</html>
